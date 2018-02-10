@@ -1,21 +1,16 @@
 ---
-layout: page
+layout: default
 ---
-<!DOCTYPE html>
-<html>
-  <head>
-    {% include head.html %}
-  </head>
-  <body>
-    {% include navigation.html %}
-    <div class="application">
-      {% include global.html %}
-      {% include search.html %}
-      {% include header.html %}
-      <section class="wrapper page">
-        {{content}}
-      </section>
+<div class="post-ribbon"></div>
+
+<div class="container page-container">
+  <div class="post-page card-panel z-depth-2">
+    <div class="post-section">
+      <div class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+      </div>
+
+      <article class="post-content">{{ content }}</article>
     </div>
-  </body>
-  {% include footer.html %}
-</html>
+  </div>
+</div>

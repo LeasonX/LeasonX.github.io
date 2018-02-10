@@ -1,37 +1,49 @@
 ---
-layout: post
+layout: default
 ---
-<!DOCTYPE html>
-<html>
-  <head>
-    {% include head.html %}
-  </head>
-  <body>
-    {% include navigation.html %}
-    <div class="application">
-      {% include global.html %}
-      {% include search.html %}
-      {% include header.html %}
-      <section class="wrapper post">
-        {{content}}
 
-        {% if page.highlights != false %}
-          {% include highlight.html %}
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      {% if page.date %}{{ page.date | date: "%b %-d, %Y" }}{% else %}unknown{% endif %}
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      {% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        {% if page.categories %}{% for category in page.categories %}{{ category }}{% unless forloop.last %}, {% endunless %}{% endfor %}
+        {% else %}unknown
         {% endif %}
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: {% if page.update %}{{ page.update | date: "%b %-d, %Y" }}{% else %}{{ page.last_modified_at | date: "%b %-d, %Y" }}{% endif %}
+    </p>
 
-        {% if page.comments %}
-          {% include comment.html %}
-        {% endif %}
+    <div class="post-header">
+      <h1 class="post-title">{{ page.title }}</h1>
 
-        {% if page.related %}
-          {% include related.html %}
-        {% endif %}
-
-      </section>
+      {% if page.tags %}
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        {% for tag in page.tags %}
+        <div class="chip">{{ tag }}</div>
+        {% endfor %}
+      {% endif %}
     </div>
-  {% if page.comments %}
-  <script id="dsq-count-scr" src="//philsensus.disqus.com/count.js" async></script>
+
+    <article class="post-content">
+      {{ content | toc_generate }}
+    </article>
+
+    {% include share.html %}
+
+  </div>
+  </div>
+
+  {% if page.mathjax %}
+    {% include mathjax_support.html %}
   {% endif %}
-  </body>
-  {% include footer.html %}
-</html>
+
+</div>
