@@ -8,7 +8,7 @@ googleplus_username: leasonxxx
 head-title: Leason blog
 title: love life
 
-baseurl: "/"    # the subpath of your site, "/blog"
+baseurl: ""    # the subpath of your site, "/blog"
 url: ""
 
 # footer 
