@@ -1,49 +1,49 @@
 ---
-layout: default
+layout: compress
 ---
-
-<div class="post-ribbon"></div>
-
-<div class="container post-container">
-  <div class="post-page card-panel z-depth-2">
-  <div class="post-section">
-
-    <p class="grey-text">
-      <i class="mdi mdi-calendar"></i>&nbsp;
-      {% if page.date %}{{ page.date | date: "%b %-d, %Y" }}{% else %}unknown{% endif %}
-      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
-      {% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %}
-      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
-      <span class="capitalize">
-        {% if page.categories %}{% for category in page.categories %}{{ category }}{% unless forloop.last %}, {% endunless %}{% endfor %}
-        {% else %}unknown
-        {% endif %}
-      </span>
-      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: {% if page.update %}{{ page.update | date: "%b %-d, %Y" }}{% else %}{{ page.last_modified_at | date: "%b %-d, %Y" }}{% endif %}
-    </p>
-
-    <div class="post-header">
-      <h1 class="post-title">{{ page.title }}</h1>
-
-      {% if page.tags %}
-        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
-        {% for tag in page.tags %}
-        <div class="chip">{{ tag }}</div>
-        {% endfor %}
-      {% endif %}
-    </div>
-
-    <article class="post-content">
-      {{ content | toc_generate }}
-    </article>
-
-    {% include share.html %}
-
-  </div>
-  </div>
-
-  {% if page.mathjax %}
-    {% include mathjax_support.html %}
-  {% endif %}
-
-</div>
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"><!--<![endif]-->
+<head>
+    {% include head.html %}
+</head>
+<body>
+    {% include nav.html %}
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="wrapper animated fadeIn">
+            <div class="content">
+                <div class="post-title {% if page.feature %} feature {% endif %}">
+                    <h1>{{ page.title }}</h1>
+                    <h4>{{ page.date | date_to_string }}</h4>
+                    {% if site.reading_time %}
+                    <p class="reading-time">
+                      <i class="fa fa-clock-o"></i>
+                      {% include read-time.html %}
+                    </p><!-- /.entry-reading-time -->
+                    {% endif %}
+                    {% if page.project %}
+                    <a class="btn zoombtn" href="{{site.url}}/projects/">
+                    {% else %}
+                    <a class="btn zoombtn" href="{{site.url}}/posts/">
+                    {% endif %}
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                </div>
+                {{ content }}
+                <div class="entry-meta">
+                {% include meta.html %}
+                </div>
+            </div>
+        </div>
+        {% if page.comments and site.disqus_shortname %}<section id="disqus_thread" class="animated fadeInUp"></section><!-- /#disqus_thread -->{% endif %}
+    </header>
+    {% include scripts.html %}
+    {% if site.mathjax == true %}
+    <!-- MathJax -->
+    <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    {% endif %}
+</body>
+</html>

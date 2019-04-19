@@ -1,81 +1,30 @@
-Materialize - jekyll
-==============
+# Moon Jekyll Theme [![Donate](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/taylantatli/0usd)  
+  
+## `Sorry guys but there will be no update until I buy a new laptop.`
+    
+######(If you like this theme or using it, please give a :star: for motivation.)
 
+**[Moon](https://taylantatli.github.io/Moon)** is a minimal, one column jekyll theme.
 
-## Introducton
+## Features
+* Minimal, you can focus on your content
+* Responsive
+* Disqus integration
+* Syntax highlighting
+* Optional post image
+* Social icons
+* Page for sharing projects
+* Optional background image
+* Simple navigation menu
+* MathJax support
 
-This jekyll theme is based on [materialize](http://materializecss.com).
-(NOTE: this theme is only made for my own, but you can modify it freely.)
+## Preview
 
-[Open demo](https://mumuxme.github.io/materialize-jekyll/)
+![screenshot of Moon](https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png)    
+![screenshot of Moon](https://cloud.githubusercontent.com/assets/754514/14509716/61ac6c8e-01d6-11e6-879f-8308883de790.png)
 
+See a [live version of Moon](https://taylantatli.github.io/Moon) hosted on GitHub.
 
-## Getting start
+## Getting Started
 
-#### Install
-
-You may need some dev headers, for debian/linux, just run:
-
-```
-# apt-get install liblzma-dev zlib1g-dev
-```
-
-(Other dependencies may also needed.)
-
-```
-$ git clone https://github.com/mumuxme/materialize-jekyll
-$ cd materialize-jekyll
-$ bundle install
-```
-
-#### Run
-
-1. Modify `_config.yml`, `about.md` and other(whatever you need).
-2. You can add a `favicon.ico` file in the project root directory.
-3. If you want to use google analytics, add your `google-analytics.js` into `js` directory.
-
-Then:
-
-```
-$ bundle exec jekyll s
-
-# or start with draft
-$ bundle exec jekyll s --drafts
-```
-
-## Or start with docker
-
-```
-cd materialize-jekyll
-
-# export GEM_MIRROR=mirror.https://rubygems.org
-export GEM_MIRROR='Your-ruby-gem-mirror'
-
-make build
-make run
-```
-
-
-## Other
-
-#### Emoji
-
-You can use GitHub-flavored emoji. See [emoji cheat sheet](http://www.webpagefx.com/tools/emoji-cheat-sheet/)
-
-#### TODO
-
-- Add comment. (???)
-- Add options to choose self host or cdn.
-
-
-## License
-
-[GNU GPL v3](http://www.gnu.org/licenses/).
-
-Others:
-
-- jquery: <https://jquery.com>
-- materialize: <http://materializecss.com>
-- material-scrolltop: [bartholomej/material-scrolltop](https://github.com/bartholomej/material-scrolltop)
-- material design icon: [Templarian/MaterialDesign](https://github.com/Templarian/MaterialDesign) or <https://materialdesignicons.com/getting-started>
-- GitHub-flavored emoji plugin: [jemoji](https://github.com/jekyll/jemoji)
+To learn how to install and use this theme check out the [Setup Guide](https://taylantatli.github.io/Moon/moon-theme/) for more information.
