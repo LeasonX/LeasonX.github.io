@@ -29,19 +29,21 @@ comments: true
         }
    }
    ```
+   ---
 2. 第二次循环改变上面函数的end,将其减1,直至1,以此类推,外层循环则为下面这格式
    ```java
    for (int i = end; i >=- 1; i--) {
     // ...
    }
    ```
+   ---
 3. 合并内外层循环合并,排序算法为
    ```java
     void bubbleSort(int[] datas) {
        int end = datas.length - 2;
         for (int i = end; i >= 1; i--) {
             for (int j = 0; j <= i; j++) {
-                //如果data[i] > data[i+1] 交换两个数字
+                //如果data[j] > data[j+1] 交换两个数字
                 if (datas[j] > datas[j + 1]) {
                     int temp = datas[j];
                     datas[j] = datas[j + 1];
