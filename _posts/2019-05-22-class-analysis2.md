@@ -51,7 +51,7 @@ public class ClazzStudy {
 | ACC_ANNOTATION | 0X2000 | 表示是个注解                                                                                                                                                    |
 | ACC_ENUM       | 0X4000 | 表示是个枚举类                                                                                                                                                  |
 
-0X0021 = 0X0001 | 0X0020,所以表示这个类是public的,因为用的是JDK1.8所以ACC_SUPER标志也为真,其它的接口标志什么的都为false.
+`0X0021 = 0X0001 | 0X0020`,所以表示这个类是public的,因为用的是JDK1.8所以ACC_SUPER标志也为真,其它的接口标志什么的都为false.
 
 ## 2. 类索引、父类索引、接口索引集合
 
