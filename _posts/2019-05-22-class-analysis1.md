@@ -191,7 +191,7 @@ constant_pool_info是一种表结构数据,class文件中一般存在14种这种
 
 ---
 
-14.tag14: 1, 字符串长度15: `43 6C 61 7A 7A 53 74 75 64 79 2E 6A 61 76 61`, 对应字符串 `ClazzStudy.java`
+14.tag14: 1,  字符串长度15: `43 6C 61 7A 7A 53 74 75 64 79 2E 6A 61 76 61`, 对应字符串 `ClazzStudy.java`
 
 ---
 
@@ -225,7 +225,7 @@ constant_pool_info是一种表结构数据,class文件中一般存在14种这种
 |:----:|:-------------------------:|
 | 5    | m                         |
 | 6    | I                         |
-| 7    |  \<init\>                     |
+| 7    |  \<init\>                 |
 | 8    | ()V                       |
 | 9    | Code                      |
 | 10   | LineNumberTable           |
