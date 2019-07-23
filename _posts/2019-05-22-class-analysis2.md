@@ -165,7 +165,7 @@ name_index为`00 05`,对应常量池的字符串为`m`,`descriptor_index`为`I`,
 属性表的结构如下
 
 | 类型 | 名称                 | 数量             |
-|-----|----------------------|------------------|
+|------|----------------------|------------------|
 | u2   | attribute_name_index | 1                |
 | u4   | attribute_length     | 1                |
 | u1   | info                 | attribute_length |
@@ -182,7 +182,7 @@ name_index为`00 05`,对应常量池的字符串为`m`,`descriptor_index`为`I`,
 Code属性表示的是方法里面的代码经过编译之后，最终以字节码指令的形式存在Code属性中。而Code属性标的结构如下
 
 |      类型      | 名称                   | 数量                   |
-|--------------|------------------------|------------------------|
+|----------------|------------------------|------------------------|
 | u2             | attribute_name_index   | 1                      |
 | u4             | attribute_length       | 1                      |
 | u2             | max_stack              | 1                      |
@@ -227,3 +227,45 @@ code字节码分别在字节码指令表中表示的是
 ---
 
 第二个方法
+解析步骤同上:
+`access_flag` = `0X0001`为`public`的，`name_index` = `0X000B`，对应着常量池索引号为`addM`，表示是我们自己写的那个方法，`descriptor_index` = `0X000C`，对应着描述符为`()V`，说明方法整个就是`public void addM()`的，和我们定义的一样。
+
+接着来看下属性表:
+`attribute_count` = `0X0001`，`attribute_name_index` = `0X0009` = `Code`，说明是`Code`属性，所以对应的结构上面已经讲过:
+- `attribute_length` = `0X0000001F` = 31
+- `max_stack` = `0X0002` = 2
+- `max_locals` = `0X0001` = 1
+- `code_length` = `0X00000007` = 7
+- `code` = `0X2A`、`0XB4`、`0X00`、`0X02`、`0X04`、`0X60`、`0XAC`
+- `exception_table_length` = `0X0000` = 0
+- `attribute_count` = `0x0001` = 1
+- `attribute_info`:
+  - `attribute_name_index` = `0X000A` = `LineNumberTable`
+  - `attribute_length` = `0X00000006` = 6
+  - `line_number_table_length` = `0X0001` = 1
+  - `line_number_table`:
+    - `start_pc` = `0X0000` = 0
+    - `line_number` = `0X0007` = 7
+
+同理，这个方法最大栈深度为2，本地变量表长度为1，字节码指令长度为7个字节，异常表没有，有个LineNumberTable，字节码指令开始行号为0，对应代码的第七行，这些都是没问题的，具体的字节码指令含义如下:
+
+- `0X2A` = `aload_0` 将0个slot中为reference类型的本地变量推送到操作数栈顶。即将this推到栈顶
+- `0XB4` = `get_field` 获取指定类的实例域，并将其值压入栈顶。后面跟着双字节长度的，指向常量池索引号的`CONSTANT_Fieldref_info`类型数据
+- `0X0002` 对应的是常量池中`m`字段的信息
+- `0X04` = `iconst_1` 将int型1推到栈顶
+- `0X60` = `iadd` 将栈顶两个int型数据相加并将结果推到栈顶，也就是计算`m + 1`
+- `0XAC` = `ireturn` 将栈顶数据返回，就是返回上面`m + 1`的计算结果
+
+所以根据上述可知最大操作数栈深度为2，本地变量就只要取this就可以了。
+从`max_stack`到`line_number`数出来也是31字节长度，符合`attribute_length`。
+
+除了上述方法表里自带的属性表，最后的`00 01 00 0D 00 00 00 02 00 0E`也是属于class文件自身的属性表的内容，解析出来的`0X0001` = 1,说明属性表的大小为1，`attribute_name_index` = `0X000D` = 13，对应常量池的`SourceFile`的字面量，
+`SourceFile`类型的树形结构如下
+| 类型 | 名称                 | 数量 |
+|------|----------------------|------|
+| u2   | attribute_name_index | 1    |
+| u4   | attribute_length     | 1    |
+| u2   | sourcefile_index     | 1    |
+所以 `attribute_length` = `0X00000002` = 2，`sourcefile_index` = `0X0E` = 14，对应常量池的信息为`ClazzStudy.java`，表示源码文件文件名。
+
+至此所有的字节码都翻译完了，发现class文件主要是以魔数、版本号、常量池、类信息、字段信息、方法信息、属性表的顺序来存储信息的，最后注意的是字段和方法信息都内置了一些属性表的信息，之外的属性表是整个class文件的属性信息，也是自己容易解析遗漏的。
