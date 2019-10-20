@@ -267,7 +267,7 @@ code字节码分别在字节码指令表中表示的是
 | u2   | attribute_name_index | 1    |
 | u4   | attribute_length     | 1    |
 | u2   | sourcefile_index     | 1    |
-v
+
 所以 `attribute_length` = `0X00000002` = 2，`sourcefile_index` = `0X0E` = 14，对应常量池的信息为`ClazzStudy.java`，表示源码文件文件名。
 
 至此所有的字节码都翻译完了，发现class文件主要是以魔数、版本号、常量池、类信息、字段信息、方法信息、属性表的顺序来存储信息的，最后注意的是字段和方法信息都内置了一些属性表的信息，之外的属性表是整个class文件的属性信息，也是自己容易解析遗漏的。
